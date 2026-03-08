@@ -16,3 +16,4 @@ COPY --from=build /app .
 EXPOSE 80
 
 ENTRYPOINT ["dotnet", "WebhookTask.dll"]
+
