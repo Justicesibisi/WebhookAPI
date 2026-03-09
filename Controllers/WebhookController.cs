@@ -25,8 +25,6 @@ namespace WebhookTask.Controllers
 
             var response = new WebhookResponse
             {
-                Id = request.Id,
-                Age = request.Age,
                 Word = sortedCharacters
             };
 
