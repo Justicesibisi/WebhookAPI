@@ -5,14 +5,29 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Enable CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+});
+
 var app = builder.Build();
 
-// Enable Swagger ALWAYS (not just development)
+// Use CORS
+app.UseCors("AllowAll");
+
+// Enable Swagger ALWAYS
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebhookTask API V1");
-    c.RoutePrefix = string.Empty; // Makes Swagger open at root URL
+    c.RoutePrefix = string.Empty;
 });
 
 //app.UseHttpsRedirection();
